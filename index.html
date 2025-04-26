@@ -37,6 +37,21 @@
                 <li class="nav-item"><a class="nav-link" href="#tech">Tech Stack</a></li>
                 <li class="nav-item"><a class="nav-link" href="#stats">GitHub Stats</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item">
+                    <button class="nav-link dropdown dropdown-toggle" href="#languages" data-bs-toggle="dropdown"
+                            aria-expanded="false" data-bs-target="#languages">
+                        Languages
+                        <ul id="languages" style="min-width: 0;" class="dropdown-menu dropdown-menu-dark"
+                            aria-labelledby="navbarDropdown">
+                            <li class="dropdown-item"><a class="nav-link" href="javascript:void(0)"
+                                                         id="l18n-en">English</a></li>
+                            <li class="dropdown-item"><a class="nav-link" href="javascript:void(0)" id="l18n-pt-BR">Português
+                                (Brasil)</a></li>
+                            <li class="dropdown-item"><a class="nav-link" href="javascript:void(0)" id="l18n-es-ES">Español</a>
+                            </li>
+                        </ul>
+                    </button>
+                </li>
             </ul>
         </div>
     </div>
@@ -236,15 +251,15 @@
                     <div class="col-4">
                         <picture class="row px-0">
                             <source
-                                    srcset="https://github-readme-stats-git-main-faelmoris-projects.vercel.app/api/top-langs/?username=faelmori&layout=compact&show_icons=true&theme=radical&hide=javascript,batchfile,tex,ejs,rich text format,less,css,roff,text,markup,scss,html&bg_color=0d1117&text_color=ffffff&icon_color=ffffff&title_color=ffffff&border_radius=10&langs_count=6"
+                                    srcset="https://github-readme-stats-git-main-faelmoris-projects.vercel.app/api/top-langs/?username=faelmori&layout=compact&show_icons=true&theme=radical&hide=javascript,batchfile,tex,ejs,rich text format,less,css,roff,text,markup,scss,html&bg_color=0d1117&text_color=ffffff&icon_color=ffffff&title_color=ffffff&border_radius=10&size_weight=0.5&count_weight=0.5&langs_count=10"
                                     media="(prefers-color-scheme: radical)"
                             />
                             <source
-                                    srcset="https://github-readme-stats-git-main-faelmoris-projects.vercel.app/api/top-langs/?username=faelmori&layout=compact&show_icons=true&theme=radical&hide=javascript,batchfile,tex,ejs,rich text format,less,css,roff,text,markup,scss,html&bg_color=0d1117&text_color=ffffff&icon_color=ffffff&title_color=ffffff&border_radius=10&langs_count=6"
+                                    srcset="https://github-readme-stats-git-main-faelmoris-projects.vercel.app/api/top-langs/?username=faelmori&layout=compact&show_icons=true&theme=radical&hide=javascript,batchfile,tex,ejs,rich text format,less,css,roff,text,markup,scss,html&bg_color=0d1117&text_color=ffffff&icon_color=ffffff&title_color=ffffff&border_radius=10&size_weight=0.5&count_weight=0.5&langs_count=10"
                                     media="(prefers-color-scheme: radical), (prefers-color-scheme: no-preference)"
                             />
                             <img class="img-fluid col-12"
-                                 src="https://github-readme-stats-git-main-faelmoris-projects.vercel.app/api/top-langs/?username=faelmori&layout=compact&show_icons=true&theme=radical&hide=javascript,batchfile,tex,ejs,rich text format,less,css,roff,text,markup,scss,html&bg_color=0d1117&text_color=ffffff&icon_color=ffffff&title_color=ffffff&border_radius=10&langs_count=10"
+                                 src="https://github-readme-stats-git-main-faelmoris-projects.vercel.app/api/top-langs/?username=faelmori&layout=compact&show_icons=true&theme=radical&hide=javascript,batchfile,tex,ejs,rich text format,less,css,roff,text,markup,scss,html&bg_color=0d1117&text_color=ffffff&icon_color=ffffff&title_color=ffffff&border_radius=10&size_weight=0.5&count_weight=0.5&langs_count=10"
                                  alt="GitHub Languages Stats"/>
                         </picture>
                     </div>
@@ -359,6 +374,165 @@
 
   gtag('config', 'G-34CC8E2N2L');
 </script>
-        
+<script type="text/javascript">
+    let texts = {};
+    let currentLanguage = localStorage.getItem("lang");
+
+    const loadTexts = async (selectedLanguage) => {
+        const langBefore = currentLanguage;
+        try {
+            if (!selectedLanguage || selectedLanguage === "null" || selectedLanguage === "undefined" || selectedLanguage === "") {
+                selectedLanguage = "en"
+            }
+            texts = await requireTexts(selectedLanguage);
+            if (!texts) {
+                console.error("No texts found for the selected language.");
+            } else if (texts.error) {
+                console.error("Error loading texts:", texts.error);
+            } else {
+
+                currentLanguage = selectedLanguage;
+                populateTexts(texts);
+                localStorage.setItem("lang", selectedLanguage);
+            }
+        } catch (error) {
+            console.error("Error loading texts:", error);
+            currentLanguage = langBefore;
+        }
+    }
+    const requireTexts = async (selectedLanguage) => {
+        const response = await fetch([document.location.origin, '/assets/l18n/', selectedLanguage, '.json'].join(''));
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        if (response.status === 404) {
+            console.error("Language file not found:", selectedLanguage);
+            return null;
+        }
+        console.log("Loading texts for language:", selectedLanguage);
+        console.log("Response:", response);
+        return await response.json();
+    };
+    const populateTexts = (jsonTexts) => {
+        document.title = jsonTexts.title;
+        document.querySelector('meta[name="description"]').setAttribute("content", jsonTexts.meta.description);
+
+        // Navbar
+        document.querySelector(".navbar-brand").textContent = jsonTexts.navbar.brand;
+        const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+        navLinks[0].textContent = jsonTexts.navbar.links.home;
+        navLinks[1].textContent = jsonTexts.navbar.links.about;
+        navLinks[2].textContent = jsonTexts.navbar.links.tech;
+        navLinks[3].textContent = jsonTexts.navbar.links.stats;
+        navLinks[4].textContent = jsonTexts.navbar.links.contact;
+
+        // Header
+        document.querySelector("header h1").textContent = jsonTexts.header.title;
+
+        // About Section
+        document.querySelector("#about h5").textContent = jsonTexts.about.title;
+        const aboutParagraphs = document.querySelectorAll("#about .card-body p");
+        aboutParagraphs[0].textContent = jsonTexts.about.intro;
+        aboutParagraphs[1].textContent = jsonTexts.about.details;
+
+        // Tech Stack Section
+        document.querySelector("#tech h5").textContent = jsonTexts.tech.title;
+        const techParagraphs = document.querySelectorAll("#tech .card-body p");
+        techParagraphs[0].textContent = jsonTexts.tech.roles;
+        techParagraphs[1].textContent = jsonTexts.tech.frameworks;
+        techParagraphs[2].textContent = jsonTexts.tech.tools;
+
+        // GitHub Stats Section
+        document.querySelector("#stats h5").textContent = jsonTexts.stats.title;
+        const statsParagraphs = document.querySelectorAll("#stats .card-body p");
+        statsParagraphs[0].textContent = jsonTexts.stats.contributions;
+        statsParagraphs[1].textContent = jsonTexts.stats.statistics;
+        statsParagraphs[2].textContent = jsonTexts.stats.languages;
+
+        // Contact Section
+        document.querySelector("#contact h2").textContent = jsonTexts.contact.title;
+        const contactFormLabels = document.querySelectorAll("#contact form .form-label");
+        contactFormLabels[0].textContent = jsonTexts.contact.form.name;
+        contactFormLabels[1].textContent = jsonTexts.contact.form.email;
+        contactFormLabels[2].textContent = jsonTexts.contact.form.message;
+        const contactFormButton = document.querySelector("#contact form button");
+        if (contactFormButton) {
+            contactFormButton.textContent = jsonTexts.contact.form.button;
+        }
+        const contactFooterP = document.querySelector("#contact .card-footer p");
+        if (contactFooterP) {
+            contactFooterP.textContent = jsonTexts.contact.footer;
+        }
+
+        // Footer
+        const currentYear = new Date().getFullYear();
+        const footerContainerText = document.querySelector("footer .container");
+        if (footerContainerText) {
+            footerContainerText.textContent = jsonTexts.footer.text.replace("{year}", currentYear);
+        }
+        const footerLink = document.querySelector("footer a")
+        if (footerLink) {
+            footerLink.textContent = jsonTexts.footer.link;
+        }
+        const htmlTag = document.querySelector("html");
+        if (htmlTag) {
+            htmlTag.setAttribute("lang", currentLanguage);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const languageButtons = document.querySelectorAll("#languages .dropdown-item");
+        languageButtons.forEach(button => {
+            button.addEventListener("click", function (ev) {
+                currentLanguage = ev.target.id.replace("l18n-", "");
+                loadTexts(currentLanguage);
+            });
+        });
+        if (currentLanguage === "") {
+            loadTexts("en");
+        } else {
+            loadTexts(currentLanguage);
+        }
+    });
+</script>
+<script>
+    window.acceptrics = {};
+    localStorage.setItem("__acceptrics_conf", JSON.stringify({
+        "gcmAdvanced": "true",
+        "backgroundColor": "#6a6262",
+        "fontColor": "#ffffff",
+        "geoArea": "worldwide",
+        "accountNum": "bbud5dbr",
+        "useTranslation": true,
+        "bannerStyle": "left"
+    }));
+    document.addEventListener("__acceptrics_loaded", async () => {
+        await window.acceptrics.initializeSettings();
+    });
+</script>
+<script src="https://cdn.acceptrics.com?n=bbud5dbr"></script>
 </body>
 </html>
+<script type="text/javascript">
+    const _changeClass = (ev) => {
+        try {
+            const wherePutClassSelector = "acceptricsModalContent"
+            const wherePutClass = document.getElementById(wherePutClassSelector);
+            const classToAdd = "bg-dark";
+            const classToRemove = "bg-light";
+            if (wherePutClass) {
+                if (wherePutClass.classList.contains(classToRemove)) {
+                    wherePutClass.classList.remove(classToRemove);
+                }
+                if (!wherePutClass.classList.contains(classToAdd)) {
+                    wherePutClass.classList.add(classToAdd);
+                }
+            }
+        } catch (e) {
+            console.error("Error changing class:", e);
+        }
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("acceptricsChooseSettingsBtn").addEventListener("click", (ev) => _changeClass(ev));
+    });
+</script>
