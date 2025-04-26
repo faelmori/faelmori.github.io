@@ -10,13 +10,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rafa Mori | Dev Portfolio</title>
     <meta name="description" content="Rafa Mori - Full Cycle Developer Portfolio">
-    <link href="https://faelmori.github.io/assets/bootstrap/bootstrap.css" rel="stylesheet">
-    <link rel="icon" href="https://faelmori.github.io/favicon.ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" href="https://faelmori.github.io/apple-touch-icon.png"/>
-    <link href="https://faelmori.github.io/favicon-16x16.png" sizes="16x16" type="image/png"/>
-    <link href="https://faelmori.github.io/favicon-32x32.png" sizes="32x32" type="image/png"/>
-    <link href="https://faelmori.github.io/assets/manifest.json" rel="manifest"/>
-    <link href="https://faelmori.github.io/assets/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="assets/bootstrap/bootstrap.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+    <link href="favicon-16x16.png" sizes="16x16" type="image/png"/>
+    <link href="favicon-32x32.png" sizes="32x32" type="image/png"/>
+    <link href="assets/manifest.json" rel="manifest"/>
+
 </head>
 <body class="text-light d-flex flex-column min-vh-100 text-light bg-dark bg-opacity-50">
 
@@ -57,8 +58,8 @@
         <div class="card mb-3 text-white bg-dark shadow shadow-darker rounded p-3">
             <div class="card-header py-3">
                 <div class="card-title row">
-                    <img src="https://avatars.githubusercontent.com/u/80360183?s=96&v=4" class="card-img-top mx-4 col-3"
-                         alt="Rafa Mori" style="width: 5%; height: auto;"/>
+                    <img src="assets/icons/penguim.png" class="card-img-top mx-3 col-3"
+                         alt="Rafa Mori" style="width: 7%; height: auto;"/>
                     <h5 class="col-9 align-self-center">
                         About Me
                     </h5>
@@ -86,7 +87,7 @@
         <div class="card mb-3 text-white bg-dark shadow shadow-darker rounded p-3">
             <div class="card-header py-3">
                 <div class="card-title row">
-                    <img src="https://faelmori.github.io/assets/icons/tech_stack_a.png"
+                    <img src="assets/icons/tech_stack_a.png"
                          class="card-img-top ml-3 mr-4 col-3" alt="Rafa Mori"
                          style="width: 7%; height: auto;"/>
                     <h5 class="col-9 align-self-center">
@@ -180,15 +181,18 @@
 
     <section id="stats" class="mb-5 bg-dark shadow shadow-darker rounded">
         <div class="card mb-3 text-white bg-dark shadow shadow-darker rounded p-3">
-            <div class="card-header">
-                <h5><img
-                        src="https://faelmori.github.io/assets/icons/charts.webp"
-                        class="card-img-top mx-4"
-                        alt="Rafa Mori"
-                        style="width: 5%; height: auto;"
-                >
-                    GitHub Stats
-                </h5>
+            <div class="card-header py-3">
+                <div class="card-title row">
+                    <img
+                            src="assets/icons/charts.webp"
+                            class="card-img-top ml-3 mr-2 col-3"
+                            alt="Rafa Mori"
+                            style="width: 7%; height: auto;"
+                    >
+                    <h5 class="col-9 align-self-center">
+                        GitHub Stats
+                    </h5>
+                </div>
             </div>
             <div class="card-body">
                 <div class="row mb-3 card-title">
@@ -200,7 +204,7 @@
                     <div class="col-12">
                         <div class="row">
                         <img class="img-fluid col-12"
-                             src="https://faelmori.github.io/assets/screenshots/profile_contributions.png"
+                             src="assets/screenshots/profile_contributions.png"
                              alt="GitHub Contributions"/>
                         </div>
                     </div>
@@ -249,29 +253,78 @@
 
         </div>
     </section>
-
     <section id="contact" class="mb-5 bg-dark shadow shadow-darker rounded">
-        <div class="card mb-3 text-white bg-dark shadow shadow-darker rounded p-3">
+        <div class="card mb-3 text-white bg-dark shadow shadow-darker rounded p-3" style="min-height: 400px;">
             <div class="card-header">
                 <h2>Contact</h2>
             </div>
-            <div class="card-body text-center">
-                <h5>
-                    <p class="card-subtitle">
-                        📫<a href="mailto:faelmori@gmail.com" class="text-decoration-none">Email</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                        💼 <a href="https://www.linkedin.com/in/rafael-mori-b7025516/" class="text-decoration-none">LinkedIn</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                        <i style="max-width: 50px;max-height: 30px;" class="text-decoration-none">
-                            <img src="https://faelmori.github.io/assets/icons/x_twitter_a.svg"
-                                 style="max-width: 30px;max-height: 30px;"
-                                 alt="X (Twitter)" class="p-0 m-0"/>
-                        </i>
-                        <a href="https://x.com/faelOmori" class="text-decoration-none">X (Twitter)</a>
-                    </p>
-                </h5>
-            </div>
-            <div class="card-footer text-center">
-                <p>I am always open to new opportunities and collaborations. If you are interested in working with me or
-                    have any questions, feel free to reach out!</p>
+            <div class="card-body text-center" style="height: 430px;">
+                <div class="row" style="height: 100%;">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="form-container">
+                            <form
+                                    action="mailto:faelmori@gmail.com"
+                                    method="POST"
+                                    class="p-3 text-start"
+                            >
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="4"
+                                              required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-warning w-100 fw-bold">
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="height: 100%;">
+                        <div class="row align-items-center justify-content-center d-flex" style="height: 100%;">
+                            <h4 class="mt-5 col-12">
+                                <p class="text-center">
+                                    I am always open to new opportunities and collaborations. If you are interested in
+                                    working with me or
+                                    have any questions, feel free to reach out!
+                                </p>
+                            </h4>
+                            <hr/>
+                            <h5 class="d-flex flex-column align-items-center justify-content-center col-12 ">
+                                <p class="align-self-bottom align-items-bottom justify-content-bottom">
+                                    <a href="mailto:faelmori@gmail.com" class="text-decoration-none">
+                                        <i style="max-width: 75px; max-height: 75px;" class="text-decoration-none">
+                                            <img src="assets/icons/gmail_a.png"
+                                                 style="max-width: 75px;max-height: 75px;"
+                                                 alt="GMail" class="p-0 m-0"/>
+                                        </i>
+                                    </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                    <a href="https://www.linkedin.com/in/rafael-mori-b7025516/"
+                                       class="text-decoration-none">
+                                        <i style="max-width: 75px; max-height: 75px;" class="text-decoration-none">
+                                            <img src="assets/icons/linkedin_a.png"
+                                                 style="max-width: 52px;max-height: 52px;"
+                                                 alt="LinkedIn" class="p-0 m-0"/>
+                                        </i>
+                                    </a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                    <a href="https://x.com/faelmori" class="text-decoration-none p-2">
+                                        <i style="max-width: 75px; max-height: 75px;" class="text-decoration-none">
+                                            <img src="assets/icons/x_twitter_b.png"
+                                                 style="max-width: 45px; height: 45px;"
+                                                 class="p-0 m-0" title="X (Twitter)" alt="X (Twitter)"/>
+                                        </i>
+                                    </a>
+                                </p>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -288,7 +341,7 @@
     </div>
 </footer>
 
-<script src="https://faelmori.github.io/assets/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELV37KJCND"></script>
