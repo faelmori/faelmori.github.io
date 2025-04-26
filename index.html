@@ -32,6 +32,33 @@
         f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-TNLHSN6X');</script>
     <!-- End Google Tag Manager -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+        // Define the gtag function (if it doesn't exist)
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        // TODO: UPDATE REGIONS CODES - URGENT!!!
+        /*gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'denied',
+            //'regions':[<codes by ISO 3166-2>]
+        });*/
+
+        // Default consent settings
+        gtag('consent', 'default', {
+            'ad_storage': 'accepted',
+            'ad_user_data': 'accepted',
+            'ad_personalization': 'denied',
+            'analytics_storage': 'accepted',
+        });
+    </script>
     <script>
         window.acceptrics = {};
         localStorage.setItem("__acceptrics_conf", JSON.stringify({
